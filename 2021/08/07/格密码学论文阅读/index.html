@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="MatsueYu">
+
+
+    <meta name="subtitle" content="空星与海">
+
+
+    <meta name="description" content="记录一些研究随笔和生活感想什么的">
+
+
+
+<title>格密码学论文阅读 | 星歌研究所</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+            <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">星歌研究所</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">星歌研究所</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">格密码学论文阅读</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">MatsueYu</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">August 7, 2021&nbsp;&nbsp;15:38:44</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="On-the-Security-of-Lattice-Based-Cryptography-Against-Lattice-Reduction-and-Hybrid-Attacks-心得"><a href="#On-the-Security-of-Lattice-Based-Cryptography-Against-Lattice-Reduction-and-Hybrid-Attacks-心得" class="headerlink" title="On the Security of Lattice-Based Cryptography Against Lattice Reduction and Hybrid Attacks 心得"></a>On the Security of Lattice-Based Cryptography Against Lattice Reduction and Hybrid Attacks 心得</h1><h2 id="LWE问题的Kannan-Embedding"><a href="#LWE问题的Kannan-Embedding" class="headerlink" title="LWE问题的Kannan Embedding"></a>LWE问题的Kannan Embedding</h2><p>暂略, 有时间补, 也可直接进行一个原始论文的查阅.</p>
+<h2 id="不同的estimate-2008和2016的区别"><a href="#不同的estimate-2008和2016的区别" class="headerlink" title="不同的estimate:2008和2016的区别"></a>不同的estimate:2008和2016的区别</h2><p><strong>2008 Observation：</strong></p>
+<blockquote>
+<p>给定$\delta$为root hermite factor, <em>当 $\frac{\lambda_1(\Lambda)}{\lambda_2(\Lambda)}\geq \tau\delta^{d}$的时候,LLL和BKZ能够高概率找到unique shortest non-zero vector</em>, 其中$\tau$​​是一个小于1的经验常数.</p>
+</blockquote>
+<p>当解LWE问题中使用的是Kannan Embedding的时候, $\lambda_{1}$可以被直接给出,$\lambda_2$的给出需要借用Gaussian Heuristic</p>
+<p><strong>2016 Observation:</strong></p>
+<p>给定LWE问题和Kannan Embedding, 2016 Estimating最短向量$\boldsymbol{e}$​可以被找到的条件是:</p>
+<blockquote>
+<script type="math/tex; mode=display">
+\sqrt{\frac{\beta}{d}}\left\|(\boldsymbol{e}|1)\right\|\approx \sqrt{\beta}\sigma\leq\delta^{2\beta-d}det(\Lambda{(\boldsymbol{B}}))^{1/d}</script></blockquote>
+<p>使用GSA可令其在uSVP问题中可以被泛化,具体公式自行查阅P22. 这个条件主要保证的是GSA条件里的第 $d-\beta+1$ 个Gram-Schmidt正交基 $\boldsymbol{b}_{d-\beta+1}^{*}$  一定大于最短向量$\boldsymbol{e}$的向最后一个block的Projection: $\pi_{d-\beta+1}({\boldsymbol{e}})$,  也就是说: </p>
+<script type="math/tex; mode=display">
+\pi_{d-\beta+1}({\boldsymbol{e}})\leq\boldsymbol{b}_{d-\beta+1}^{*}</script><p>意思就是对给定的LWE或者格问题, 通过不同的estimate标准, 进行blocksize $\beta$​​的选择, 从而$\beta$​越大花的时间越长.</p>
+<h2 id="2016-estimate为什么是神"><a href="#2016-estimate为什么是神" class="headerlink" title="2016 estimate为什么是神?"></a>2016 estimate为什么是神?</h2><p>这一节主要是通过分析投影子格说明为什么2016 estimate是敖的而2008 estimate是坏文明(虽然没直接说2008是坏文明). 这是来自BKZ的特性. 我们对于$\beta$​​长的子块, 首先是分析最后一个满块(长度为$\beta$​). </p>
+<p>2016 estimate是神这个结论是从如下的几个<strong>假设</strong>上推出来的. 在这个小小的体系里面,他们就如同公理:</p>
+<blockquote>
+<ol>
+<li>最短向量是从球面或近似球面上提取出来的, 即格基不能太丑陋(skew)</li>
+<li>对于向量$\boldsymbol{v}$​​, 投影子格上的该向量投影的norm(Euclidean空间上的欧氏norm)的expectation是$\frac{\sqrt{k}}{\sqrt{d}}\left|\boldsymbol{v}\right|$​</li>
+<li>Geometric Series Assumption (<strong>GSA</strong>)</li>
+</ol>
+</blockquote>
+<p>回顾BKZ, 他其实也是对每个区块做处理的时候, 只考虑该区块相较于前面所有向量积的投影子格. 对每个区块的投影子格找最短向量然后用LLL让其融为一体变成一个好格基. 它基于的思想正是<strong>要求格$\Lambda$​​的最短向量在投影子格里面仍然保持最短</strong>. </p>
+<p>这一条并不是那么显然. 由于GSA的存在, 格基归约后投影子格里正交化之后的最短格基的长度是固定的. 所以如果$\pi(\boldsymbol{v})$​​是最小的,那么它至少要比GSA给出的最短还要短. 这便是2016 estimate的条件: 在处理最后一个区块的时候, 要求投影的最短向量小于GSA给出的格基正交化之后的长度.</p>
+<p>只要我们要求每个子格中2016条件都满足的话, 这个思路就可以扩展. 在$d-\beta+1$​​被满足的时候, 往前推一个区块$d-\beta+2$​​, 该条件仍然被满足, 慢慢往前推就能给出原始格里的最短向量了.</p>
+<blockquote>
+<p>突然想到的一点还是写了吧. Enumeration的假设是投影子格的向量范数一定要比未投影之前的要小. 分支限界法的限界策略就是依照此点来展开的. 与BKZ的投影向量的假设略有不同.</p>
+</blockquote>
+<h3 id="对-BKZ2-0-算法的观察"><a href="#对-BKZ2-0-算法的观察" class="headerlink" title="对 BKZ2.0 算法的观察"></a>对 BKZ2.0 算法的观察</h3><h4 id="算法介绍"><a href="#算法介绍" class="headerlink" title="算法介绍"></a>算法介绍</h4><p>BKZ2.0算法最大的改进还是在于会在处理block的时候调用一个更小block的BKZ算法, 相当于是把投影子格作为一个单独的格, 用BKZ单独又处理了一遍. 除此之外的思路和BKZ也没有什么区别.</p>
+<p>就当作是复习, 在此略微介绍一下BKZ算法的运行思路. 如果是没有基础的人,推荐跟着论文一起看. 格基的BKZ条件其实是只要求<strong>对所有长度为$\beta$的区块满足HKZ条件</strong>. Remember that HKZ条件是一个非常强的条件, 具体是什么条件我忘了, 总之非常强就对了. 详情可以查阅Yuanmi Chen博士的毕业论文Reduction de reseau et securite concrete du chiffrement completement homomohphe. BKZ只对区块做要求, 所以是比HKZ条件更弱的, 也就是更好实现.</p>
+<p>为了满足BKZ条件,肯定就要分区块对格基进行处理. 所以算法的主要结构就是对长度为区块进行迭代. 对于每个区块, 为了满足该区块内的HKZ条件要求, 至少是index=1的HKZ条件要求, 就需要使用一个SVP oracle. 这个oracle可以用枚举或者筛法来实现, 枚举里面还有什么剪枝操作什么的我暂时没看就不太懂了. 在找到最短向量之后,还需要这个格基有足够好的形状, 所以会在SVP调用完之后进行一个LLL的处理,为的就是去掉与其他格基线性相关的部分 (去线性化). BKZ2.0 算法总体说来也就是这么一个框架, 只不过本文中使用的简化2.0算法会在前后都调用LLL, 在中间还使用了一个BKZ进行操作, 套娃了属于是. 算法长什么样不如直接去看论文.</p>
+<p>本节额外的一个记录点是最短向量会在第几轮被完全的求出来, 即剩下的轮次其实都是在做无用功. 这点可以直接的拿来cut掉BKZ算法后面的冗余部分.</p>
+<h4 id="主要观测点-给定多大的投影子格就能够完整的给出最短向量"><a href="#主要观测点-给定多大的投影子格就能够完整的给出最短向量" class="headerlink" title="主要观测点: 给定多大的投影子格就能够完整的给出最短向量?"></a>主要观测点: 给定多大的投影子格就能够完整的给出最短向量?</h4><p>Result前面的最后一段和Result一小节的所有内容主要就是找最短向量一般在哪一个轮次就被recover出来了, 剩下的部分都是在做无用功. 为此他们介绍了实验方法并给出了一个cut off index. 但这个其实是经验性质的. 此外, 该实验还证实了2016yyds这个结论 (.</p>
+<p>关于如何解释前面的实验观察, 本文给出的解释实话说并没什么说服力, 但我们姑且记录在这里. 该解释基于的假设是图3.1, 即curve of expectation of shortest vector和curve of GSA一定需要有两个交点, 这需要一定参数选择才能满足.</p>
+<p>3.2图是通过实验观测发现最短向量的average expectation和模拟函数$\sqrt{d-i+1}\sigma\approx\sqrt{\frac{d-i+1}{d}}\sqrt{m\cdot \sigma^{2}+1}$​曲线近似 (自变量为i). 通过图3.1的观察, 可以看到最短向量的expectation曲线和GSA曲线有两个交点. 在第二个交点的时候我们就有理由怀疑给出GSA的值的BKZ算法能够高概率的恢复出最短向量 (的投影值) 力. 这个投影格的index肯定是非常靠后, 所以实际上比一个块要短. 所以这个投影格的rank应该是$\gamma&lt;\beta$​. 于是这个向量会被BKZ算法安排在 $d-\gamma+1$​的位置.  于是当$i&gt;d-\gamma+1$​的时候, 最短向量的投影居然会比投影子格中bkz找到的最短向量还要短, 所以我们可以认为他们在$i$​之后的投影子格中的投影向量都是 $0$​. 因此, 这个$d-\gamma+1$​位置就比较像cut off index了.</p>
+<p>最扯的一点在于, 当这个向量位于$d-\gamma+1$​​​​的位置的时候,其实最早在$d-\gamma-\beta+1$​​​​的位置延展出来的长度为$\beta$​​​​的投影子格里面就有他的出场了 (因为后面的投影都是0嘛). 所以有理由怀疑, 在index为$d-\gamma+1$​​位置之前, 最短向量就已经被回复出来了. 这也就是图3.4的来历.</p>
+<h3 id="宣读2016-estimate合法性的重要Heuristic"><a href="#宣读2016-estimate合法性的重要Heuristic" class="headerlink" title="宣读2016 estimate合法性的重要Heuristic"></a>宣读2016 estimate合法性的重要Heuristic</h3><p>在有了前面的讨论之后, Heuristic 终于可以被给出来了. 这个Heuristic认为在一系列条件之下, Size Reduction可以高概率的解出最短向量. 关于Size Reduction相关的东西, 可以自行去查阅Yuanmi Chen博士的论文, 也可以等我哪天心血来潮写一篇.</p>
+<blockquote>
+<p><strong>Heuristic 1</strong> 假设GSA满足(至少在$k$​之前满足), 最短向量方向随机性满足, 规约后的格基令2016 estimate条件满足, <strong>且$(2)$取等号</strong>. 于是有$\boldsymbol{b}_{k}^{*}=\pi(\boldsymbol{v})$, 其中$k=d-\beta+1$​. 这时候还有如下条件满足: </p>
+<script type="math/tex; mode=display">
+\boldsymbol{v}=\boldsymbol{b}_{k}+\sum_{i=1}^{k-1}v_{i}\boldsymbol{b}_{i}</script><p>于是call Size Reduction on $\boldsymbol{b}_{k}$可以高概率的恢复$\boldsymbol{v}$.</p>
+</blockquote>
+<p>对于Heuristic的运行机制直到现在我还不甚了解, 目前的理解也就是给定一些假设, 然后用这些假设推导出来的结论. 因为这些假设不是永远正确, 所以不能被称为定理.</p>
+<p>理解或者说推导出这个Heuristic需要一些前置条件, 首先便是要知道size reduction的具体过程. </p>
+<p>由上文假设, 我们可以假定 $(3)$ 成立, 因此迭代从$k$开始到$1$为止.</p>
+<blockquote>
+<p><strong>SIZE REDUCTION</strong> </p>
+<ol>
+<li><em>(初始条件)</em>: $\boldsymbol{b}_{d-\beta+1}^{(d-\beta+1)}:=\boldsymbol{b}_{d-\beta+1}$</li>
+<li><em>(第 i 轮迭代)</em>:  给定$\boldsymbol{b}_{d-\beta+1}^{i+1}$​, $\boldsymbol{b}_{d-\beta+1}^{i}$如此给出</li>
+</ol>
+<blockquote>
+<ol>
+<li>找$\,u_i:=argmin_{\mu_i}(\left|\boldsymbol{w}_{i}\right|),\ \mu_i\in\mathbb{Z}$, where $\boldsymbol{w}_i=\mu_i \pi_{i}(\boldsymbol{b}_i)+\pi_{i}(\boldsymbol{b}_{d-\beta+1}^{(i+1)})=\mu_i\boldsymbol{b}_{i}^{*}+\pi_{i}(\boldsymbol{b}_{d-\beta+1}^{(i+1)})$</li>
+<li>$\boldsymbol{b}_{d-\beta+1}^{(i)}:= \mu_i \boldsymbol{b}_i+\boldsymbol{b}_{d-\beta+1}^{(i+1)}$​</li>
+</ol>
+</blockquote>
+</blockquote>
+<p>这个reduction好用捏. 通过这个Reduction步骤, 我们来验证Heuristic 1 的正确性.</p>
+<blockquote>
+<p>令集合$L_i=\left\{\mu \boldsymbol{b}_i^{*}+\boldsymbol{b}_{d-\beta+1}^{(i+1)}\ |\ \mu\in\mathbb{Z} \right\}$​​​​​​​. 他是子群$\left\{\mu\boldsymbol{b}_{i}^{*}\right\}$​​​​的陪集. 可看出刚才所求得 的$\boldsymbol{w}_i\in L_i$​​​​. 已知$\boldsymbol{w_i}$​​​​的最小性, 可知其在$L_i$​​​​中是最小元素.</p>
+<p><strong>假设 $\boldsymbol{b}_{d-\beta+1}^{(i+1)}=\boldsymbol{b}_{d-\beta+1}+\sum_{j=i+1}^{d-\beta}v_{j}\boldsymbol{b}_j$​</strong>, 注意第一步当$i=d-\beta$​ 时, 该条件退化为$\boldsymbol{b}_{d-\beta+1}^{(d-\beta+1)}=\boldsymbol{b}_{d-\beta+1}$​, 满足.</p>
+<p>假设上述条件满足, 由公式$(3)$, 有</p>
+<script type="math/tex; mode=display">
+\pi_i(\boldsymbol{v})=\pi_{i}(\boldsymbol{b}_{d-\beta+1}+\sum_{j=1}^{d-\beta}v_{i}\boldsymbol{b}_{i})
+= \pi_i(\boldsymbol{b}_{d-\beta+1}+\sum_{j=i+1}^{d-\beta}v_j \boldsymbol{b}_j)+\pi_{i}(\sum_{j=1}^{i}v_j\boldsymbol{b}_j) 
+=\pi_{i}(\boldsymbol{b}_{d-\beta+1}^{(i+1)})+v_i\boldsymbol{b}_{i}^{*}</script><p>  其中右边那一项推导为$v_i\boldsymbol{b}_{i}^{*}$​ 是由于关于第$i$项的投影把前面的全都清零了, 第$i$个加法项只需要投影出它的正交化向量即可.</p>
+<p>这个形式说明$\pi_{i}(\boldsymbol{v})\in L_{i}$. 因此$L_i$可以被表示为</p>
+<script type="math/tex; mode=display">
+L_i=\pi_{i}(\boldsymbol{v})+\mathbb{Z}\boldsymbol{b}_{i}^{*}</script><p>这个形式后面算概率的时候要用. $\pi_i(\boldsymbol{v})$​​ 已经被证明了属于$L_i$, 所以</p>
+<p>接下来考虑迭代的正确性. 如果$\pi_i(\boldsymbol{v})$​是$L_i$​的范数最小元素的话, 考虑一波reduction中给出的$\boldsymbol{b}_{d-\beta+1}^{(i)}$​</p>
+<script type="math/tex; mode=display">
+\boldsymbol{b}_{d-\beta+1}^{(i)}=\mu_i\boldsymbol{b}_{i}+\boldsymbol{b}_{d-\beta+1}^{(i+1)}=^{来自假设}\boldsymbol{b}_{d-\beta+1}+\sum_{j=i}^{d-\beta}v_{j}\boldsymbol{b }_{j}</script><p>这里有一个文中没有说清楚的关键点: <strong>上面那个式子建立在$\mu_i=v_i$​​​​的基础上, 这个恰是要求$\pi_i(\boldsymbol{v})=\boldsymbol{w}_i$​​​​. 注意, 这条是一个Assumption, 并不是确定成立的.</strong></p>
+<p>因此得出了新的迭代向量与条件保持一致, 证明了迭代过程的成功. 迭代到最后在, 必然有结果:</p>
+<script type="math/tex; mode=display">
+\boldsymbol{v}=\boldsymbol{b}_{d-\beta+1}^{(1)}</script><p>这就恢复出了$\boldsymbol{v}$.</p>
+</blockquote>
+<p>上面一段阐明了Heuristic 1 在一定条件下的正确性. 但是这个正确性是”高概率”的. 这个高概率是可以计算的. 注意上文的加粗的部分, 这是所谓高概率的成功条件. </p>
+<p>假设关于 $i$​​ 事件发生的概率是independence, 成功概率可以被表示为</p>
+<script type="math/tex; mode=display">
+p=\prod_{i=1}^{d-\beta}p_i</script><p>其中 $p_i=Pr\left[ \pi_i(\boldsymbol{v})\text{ is the shortest element in }L_i=\pi_i(\boldsymbol{v})+\mathbb{Z}\boldsymbol{b}_{i}^{*} \right]$​</p>
+<p>此处$\pi_i(\boldsymbol{v})$​就算不是最小, 也足够小了, 因此可以假定$p_i$表示为如下事件发生的概率, 二维实例图3.5的粗略描述可供参考:</p>
+<script type="math/tex; mode=display">
+\left\|\pi_i(\boldsymbol{v})\right\|<\min\{\left\|\pi_i(\boldsymbol{v})+\boldsymbol{b}_{i}^{*}\right\|,\left\|\pi_i(\boldsymbol{v})-\boldsymbol{b}_{i}^{*}\right\|\}</script><p>接下来由模拟函数和GSA分别给出$r_i:=\left|\pi_i(\boldsymbol{v})\right|$​的和$R_i:=\left|\boldsymbol{b}_{i}^{*}\right|$​模拟值, 便可以求解概率. 过程不抄, 请自行查阅.</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>MatsueYu</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://yukaorigenji.github.io/2021/08/07/%E6%A0%BC%E5%AF%86%E7%A0%81%E5%AD%A6%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">https://yukaorigenji.github.io/2021/08/07/%E6%A0%BC%E5%AF%86%E7%A0%81%E5%AD%A6%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%A0%BC/"># 格</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/08/08/%E7%8A%AF%E7%97%85/">犯病, 但咱不是嘉心糖捏</a>
+            
+            
+            <a class="next" rel="next" href="/2021/08/07/hello-world/">Hello World</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© MatsueYu | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

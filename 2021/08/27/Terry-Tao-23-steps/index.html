@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="MatsueYu">
+
+
+    <meta name="subtitle" content="空星与海">
+
+
+    <meta name="description" content="记录一些研究随笔和生活感想什么的">
+
+
+
+<title>Terry Tao 23 steps | 星歌研究所</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">星歌研究所</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">星歌研究所</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Terry Tao 23 steps</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">MatsueYu</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">August 27, 2021&nbsp;&nbsp;21:21:48</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E6%95%B0%E5%AD%A6/">数学</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>For comparison, actual solutions to a major problem tend to be arrived at by a process more like the following (often involving several mathematicians over a period of years or decades, with many of the intermediate steps described here being significant publishable papers in their own right):</p>
+<ol>
+<li>Isolate a toy model case x of major problem X.</li>
+<li>Solve model case x using method A.</li>
+<li>Try using method A to solve the full problem X.</li>
+<li>This does not succeed, but method A can be extended to handle a few more model cases of X, such as x’ and x”.</li>
+<li>Eventually, it is realised that method A relies crucially on a property P being true; this property is known for x, x’, and x”, thus explaining the current progress so far.</li>
+<li>Conjecture that P is true for all instances of problem X.</li>
+<li>Discover a family of counterexamples y, y’, y”, … to this conjecture. This shows that either method A has to be adapted to avoid reliance on P, or that a new method is needed.</li>
+<li>Take the simplest counterexample y in this family, and try to prove X for this special case. Meanwhile, try to see whether method A can work in the absence of P.</li>
+<li>Discover several counterexamples in which method A fails, in which the cause of failure can be definitively traced back to P. Abandon efforts to modify method A.</li>
+<li>Realise that special case y is related to (or at least analogous to) a problem z in another field of mathematics. Look up the literature on z, and ask experts in that field for the latest perspectives on that problem.</li>
+<li>Learn that z has been successfully attacked in that field by use of method B. Attempt to adapt method B to solve y.</li>
+<li>After much effort, an adapted method B’ is developed to solve y.</li>
+<li>Repeat the above steps 1-12 with A replaced by B’ (the outcome will of course probably be a little different from the sample storyline presented above). Continue doing this for a few years, until all model special cases can be solved by one method or another.</li>
+<li>Eventually, one possesses an array of methods that can give partial results on X, each of having their strengths and weaknesses. Considerable intuition is gained as to the circumstances in which a given method is likely to yield something non-trivial or not.</li>
+<li>Begin combining the methods together, simplifying the execution of these methods, locating new model problems, and/or finding a unified and clarifying framework in which many previous methods, insights, results, etc. become special cases.</li>
+<li>Eventually, one realises that there is a family of methods A^<em> (of which A was the first to be discovered) which, roughly speaking, can handle all cases in which property P^</em> (a modern generalisation of property P) occurs. There is also a rather different family of methods B^<em> which can handle all cases in which Q^</em> occurs.</li>
+<li>From all the prior work on this problem, all known model examples are known to obey either P^<em> or Q^</em>. Formulate Conjecture C: all cases of problem X obey either P^<em> or Q^</em>.</li>
+<li>Verify that Conjecture C in fact implies the problem. This is a major reduction!</li>
+<li>Repeat steps 1-18, but with problem X replaced by Conjecture C. (Again, the storyline may be different from that presented above.) This procedure itself may iterate a few times.</li>
+<li>Finally, the problem has been boiled down to its most purified essence: a key conjecture K which (morally, at least) provides the decisive input into the known methods A^<em>, B^</em>, etc. which will settle conjecture C and hence problem X.</li>
+<li>A breakthrough: a new method Z is introduced to solve an important special case of K.</li>
+<li>The endgame: method Z is rapidly developed and extended, using the full power of all the intuition, experience, and past results, to fully settle K, then C, and then at last X.</li>
+<li>The technology developed to solve major problem X is adapted to solve other related problems in the field. But now a natural successor question X’ to X arises, which lies just outside of the reach of the newly developed tools… and we go back to Step 1.</li>
+</ol>
+<p>作者：dhchen (虽然原作者肯定不是他)<br>链接：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/51219380/answer/235795482">https://www.zhihu.com/question/51219380/answer/235795482</a><br>来源：知乎</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>MatsueYu</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://yukaorigenji.github.io/2021/08/27/Terry-Tao-23-steps/">https://yukaorigenji.github.io/2021/08/27/Terry-Tao-23-steps/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/proof/"># proof</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/12/22/%E6%97%B6%E9%9A%94%E4%B8%A4%E5%B9%B4%E7%9A%84%E6%98%A5%E7%89%A9%E6%84%9F%E6%83%B3/">时隔两年的春物感想</a>
+            
+            
+            <a class="next" rel="next" href="/2021/08/11/LWE%E7%9A%84%E5%88%A9%E7%94%A8sparsification%E7%9A%84%E5%B5%8C%E5%85%A5/">LWE的利用sparsification的嵌入</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© MatsueYu | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
