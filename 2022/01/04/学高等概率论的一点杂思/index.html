@@ -17,7 +17,7 @@
 
 
 
-<title>时隔两年的春物感想 | 星歌研究所</title>
+<title>学高等概率论的一点杂思 | 星歌研究所</title>
 
 
 
@@ -131,73 +131,11 @@
                 <div class="container">
     
     
-        <div class="post-toc">
-    <div class="tocbot-list">
-    </div>
-    <div class="tocbot-list-menu">
-        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
-        <a onclick="go_top()">Back to top</a>
-        <a onclick="go_bottom()">Go to bottom</a>
-    </div>
-</div>
-
-<script>
-    document.ready(
-        function () {
-            tocbot.init({
-                tocSelector: '.tocbot-list',
-                contentSelector: '.post-content',
-                headingSelector: 'h1, h2, h3, h4, h5',
-                collapseDepth: 1,
-                orderedList: false,
-                scrollSmooth: true,
-            })
-        }
-    )
-
-    function expand_toc() {
-        var b = document.querySelector(".tocbot-toc-expand");
-        tocbot.init({
-            tocSelector: '.tocbot-list',
-            contentSelector: '.post-content',
-            headingSelector: 'h1, h2, h3, h4, h5',
-            collapseDepth: 6,
-            orderedList: false,
-            scrollSmooth: true,
-        });
-        b.setAttribute("onclick", "collapse_toc()");
-        b.innerHTML = "Collapse all"
-    }
-
-    function collapse_toc() {
-        var b = document.querySelector(".tocbot-toc-expand");
-        tocbot.init({
-            tocSelector: '.tocbot-list',
-            contentSelector: '.post-content',
-            headingSelector: 'h1, h2, h3, h4, h5',
-            collapseDepth: 1,
-            orderedList: false,
-            scrollSmooth: true,
-        });
-        b.setAttribute("onclick", "expand_toc()");
-        b.innerHTML = "Expand all"
-    }
-
-    function go_top() {
-        window.scrollTo(0, 0);
-    }
-
-    function go_bottom() {
-        window.scrollTo(0, document.body.scrollHeight);
-    }
-
-</script>
-    
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">时隔两年的春物感想</h1>
+            <h1 class="post-title">学高等概率论的一点杂思</h1>
             
                 <div class="post-meta">
                     
@@ -206,7 +144,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">December 22, 2021&nbsp;&nbsp;10:49:01</a>
+                        Date: <a href="#">January 4, 2022&nbsp;&nbsp;15:46:50</a>
                         </span>
                     
                     
@@ -222,7 +160,11 @@
         </header>
 
         <div class="post-content">
-            <h1 id="时隔两年的春物感想文"><a href="#时隔两年的春物感想文" class="headerlink" title="时隔两年的春物感想文"></a>时隔两年的春物感想文</h1><p>春物的最后一卷发行于19年11月，</p>
+            <p>为了赶1月9日的ddl，最近在疯狂的补这半年完全没学的高等概率论。本来以为应该能完成得很快，但是上手之后才发现就算拼尽全力的去向前推进，二十天也才推进了6章。虽然我肯定没有拼尽全力，但自认为也是花费了不少心血。</p>
+<p>数学，至少是高等概率论和目前学过的代数，主要思路基本都是进行定义，用性质和定理描述定义，再用性质和定理描述定义之间的关系。在做数学的过程，不止一次地想要略过证明直接接受结论。但是，很快的发现我没办法做到这一点。如果不通过证明去熟悉概念和定理，我很快的就会有一种根基不稳，摇摇晃晃的感觉，仿佛踏空在空中之楼阁上。但是花费巨量的时间使劲的磕证明，无异于影响自己本职密码学工作的时间，之后还记不下来。就感觉很亏。</p>
+<p>毕竟我还在赶ddl。</p>
+<p>写一篇这个东西无非也就是为了转换一下心情吧。毕竟理解数学没有或者至少我没发现有什么捷径可走。诸位万一发现了还请务必告诉我，如果这个博客有人看的话。</p>
+<p>收拾心情再出发吧。</p>
 
         </div>
 
@@ -237,7 +179,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="https://yukaorigenji.github.io/2021/12/22/%E6%97%B6%E9%9A%94%E4%B8%A4%E5%B9%B4%E7%9A%84%E6%98%A5%E7%89%A9%E6%84%9F%E6%83%B3/">https://yukaorigenji.github.io/2021/12/22/%E6%97%B6%E9%9A%94%E4%B8%A4%E5%B9%B4%E7%9A%84%E6%98%A5%E7%89%A9%E6%84%9F%E6%83%B3/</a></span>
+                        <span><a href="https://yukaorigenji.github.io/2022/01/04/%E5%AD%A6%E9%AB%98%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E4%B8%80%E7%82%B9%E6%9D%82%E6%80%9D/">https://yukaorigenji.github.io/2022/01/04/%E5%AD%A6%E9%AB%98%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E4%B8%80%E7%82%B9%E6%9D%82%E6%80%9D/</a></span>
                     </p>
                 
                 
@@ -269,10 +211,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2022/01/04/%E5%AD%A6%E9%AB%98%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E4%B8%80%E7%82%B9%E6%9D%82%E6%80%9D/">学高等概率论的一点杂思</a>
             
-            
-            <a class="next" rel="next" href="/2021/08/27/Terry-Tao-23-steps/">Terry Tao 23 steps</a>
+            <a class="next" rel="next" href="/2021/12/22/%E6%97%B6%E9%9A%94%E4%B8%A4%E5%B9%B4%E7%9A%84%E6%98%A5%E7%89%A9%E6%84%9F%E6%83%B3/">时隔两年的春物感想</a>
             
         </section>
 
