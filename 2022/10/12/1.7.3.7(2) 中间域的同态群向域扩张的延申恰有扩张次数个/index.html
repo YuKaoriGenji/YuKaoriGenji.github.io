@@ -17,7 +17,7 @@
 
 
 
-<title>LWE的利用sparsification的嵌入 | 星歌研究所</title>
+<title>中间域的同态群在域扩张上的延拓恰有扩张次数个 | 星歌研究所</title>
 
 
 
@@ -236,7 +236,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">LWE的利用sparsification的嵌入</h1>
+            <h1 class="post-title">中间域的同态群在域扩张上的延拓恰有扩张次数个</h1>
             
                 <div class="post-meta">
                     
@@ -245,14 +245,14 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">August 11, 2021&nbsp;&nbsp;10:45:58</a>
+                        Date: <a href="#">October 12, 2022&nbsp;&nbsp;2:07:51</a>
                         </span>
                     
                     
                         <span class="post-category">
                     Category:
                             
-                                <a href="/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a>
+                                <a href="/categories/%E6%95%B0%E5%AD%A6/">数学</a>
                             
                         </span>
                     
@@ -261,27 +261,63 @@
         </header>
 
         <div class="post-content">
-            <h1 id="LWE的Sparsified-Embedding-的描述与Performance"><a href="#LWE的Sparsified-Embedding-的描述与Performance" class="headerlink" title="LWE的Sparsified Embedding 的描述与Performance"></a>LWE的Sparsified Embedding 的描述与Performance</h1><p>前文介绍过LWE的Kannan Embedding (虽然实际上似乎并没有介绍). Kannan Embedding和后文的Bai and Galbraith’s embedding 实际上都是将BDD格嵌入一个大格, 构造uSVP问题对他进行一个解决的方法. 本质上其实是$BDD_{\alpha}\longrightarrow uSVP_{\gamma}$的格嵌入.</p>
-<p>如果这个格能变得稀疏一点就好了啊—— 大概可能有人会这么想. 稀疏的格有很多好处, 最经典的就是determinant变大了, 如果最短向量不发生改变或者改变不是很大的话, 在这个格中求解$uSVP$问题的时候, $\gamma$值将会变得更大. 而$\gamma$​​的变大将会明显的减少2016 estimate描述的BKZ求出最短向量的block的大小. 这便是sparsified embedding的思路. Sparsified Embedding 方法先对BDD格稀疏化, 然后将它嵌入到一个SVP格中.</p>
-<h2 id="嵌入描述"><a href="#嵌入描述" class="headerlink" title="嵌入描述"></a>嵌入描述</h2><ol>
-<li><p><strong>step 1: Sparsifying </strong> 这一步的的目的就是为了稀疏化BDD格. 令原有的BDD格为</p>
-<script type="math/tex; mode=display">
-\Lambda_{(\bold{A},q)}=\left\{\bold{v}\in\mathbb{Z}_{q}^{m}\ |\ \bold{b}\equiv\bold{Ax}\pmod{q} \text{ for some }\bold{x}\in\mathbb{Z}^{n}\right\}</script><p>考虑一个公共参数$p$,  这个参数描述的就是将$\Lambda_{(\bold{A},q)}$稀疏化的倍数.​B 为格$\Lambda_{(\bold{A},q)}$的一组格基.</p>
-<ol>
-<li><p>$\bold{z},\bold{u}\stackrel{$}{\longleftarrow}\mathbb{Z}^{m}_{p}$​, 独立选取嗷. </p>
+            <blockquote>
+<p>今日开始重启此博客, 主要的问题是意识到了自己是个飞舞. 为了让自己不再那么飞舞, 决定还是靠输出来强行对脑子进行一波输入.<br>本文, 或者说之后的这一系列的文章都是阅读雪江明彦老师的整数论和代数学的各个定理定义推论之后进行的对证明的理解, 采用问答形式/ 如果之后复习的时候发现了额外的问题, 我会在这里添加上的.</p>
+</blockquote>
+<h2 id="命题"><a href="#命题" class="headerlink" title="命题"></a>命题</h2><h3 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h3><ul>
+<li>$L/K$有限, 可分扩张</li>
+<li>$M$是$L/K$的中间域</li>
+<li>$\phi:M\mapsto \overline{K}$同态 ($\phi\in Hom_{K}^{al}(M,\overline{K})$)<h3 id="宣言"><a href="#宣言" class="headerlink" title="宣言"></a>宣言</h3></li>
+<li>$\phi$的$Hom_{K}^{al}(L,\overline{K})$上延拓个数为从$M$到$L$的扩张次数, 即$\psi\in Hom_{K}^{al}(L,\overline{K})$, $\left.\psi\right|_{M}=\phi$的个数为$[L:M]$个</li>
+</ul>
+<h2 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h2><h3 id="如何证明延拓个数"><a href="#如何证明延拓个数" class="headerlink" title="如何证明延拓个数"></a>如何证明延拓个数</h3><ul>
+<li>有限扩张则$L=K(a_1,\dots,a_n)$</li>
+<li>根据[[链式分拆方法]], 构造<script type="math/tex">M_0=M,\quad M_1=M(a_1),\quad M_2=M(a_1,a_2),\quad\dots,M_n=M(a_1,a_2,\dots,a_n)=L</script></li>
+<li>这是一个域扩张链条, 且每两个之间都是单扩张</li>
+<li>只需证明$\phi\in Hom_{K}^{al}(M_{i},\overline{K})$延拓到$Hom_{K}^{al}(M_{i-1},\overline{K})$由$[M_{i}:M_{i-1}]$个<blockquote>
+<p>将问题转化为单扩张下的问题</p>
+<h3 id="为什么单扩张下的问题可以转化为不止单扩张的问题"><a href="#为什么单扩张下的问题可以转化为不止单扩张的问题" class="headerlink" title="为什么单扩张下的问题可以转化为不止单扩张的问题?"></a>为什么单扩张下的问题可以转化为不止单扩张的问题?</h3></blockquote>
 </li>
-<li><p>$\bold{w}=\bold{Bu}$</p>
+<li>$\prod_{i=1}^{n}[M_{i},M_{i-1}]=[M_{n}:M_{0}]=[L:M]$ 域扩张的望远镜公式 [[]]</li>
+<li>延拓随扩张次数的乘法关系是明了的<h3 id="扩张次数和延拓个数之间的关系是通过什么建构的"><a href="#扩张次数和延拓个数之间的关系是通过什么建构的" class="headerlink" title="扩张次数和延拓个数之间的关系是通过什么建构的"></a>扩张次数和延拓个数之间的关系是通过什么建构的</h3></li>
+<li>$\psi\in Hom_{K}^{al}(M_{i-1},\overline{K})$</li>
+<li>令$\psi$的$Hom_{K}^{al}(M_{i},\overline{K})$上延拓为$\xi$, 则延拓必然满足$b\in M_{i-1}$, $\xi(b)=\psi(b)$</li>
+<li>$a_i$在$M_{i-1}$上的最小多项式$g_i(x)\in M_{i-1}(x)$</li>
+<li><strong>证明$\xi(a_i)$与$\psi(g_i)(x)$在$\overline{K}$上的根等价</strong><ul>
+<li>$\psi(g_i)(x)$指$\psi$作用在$g_i$的系数之上.<h4 id="如何证明-xi-a-i-是-psi-g-i-x-在-overline-K-上的根-最多这么多个"><a href="#如何证明-xi-a-i-是-psi-g-i-x-在-overline-K-上的根-最多这么多个" class="headerlink" title="如何证明$\xi(a_i)$是$\psi(g_i)(x)$在$\overline{K}$上的根 (最多这么多个)"></a>如何证明$\xi(a_i)$是$\psi(g_i)(x)$在$\overline{K}$上的根 (最多这么多个)</h4></li>
+</ul>
 </li>
-<li><p>check下述条件. 如果满足, 则继续进行. 否则重新开始. 其中参数$l_0$的选取来自另一篇文章, 本文不多做展开:</p>
-<script type="math/tex; mode=display">
-\left\|\bold{b}+\bold{w}\right\|<\frac{(m+1)l_0}{\sqrt{2}}</script></li>
-<li><script type="math/tex; mode=display">
-</script></li>
-<li></li>
-</ol>
+<li>证明$\psi(g_{i})(\xi(a_i))=0$</li>
+<li>利用$\forall b\in M_{i-1}$, $\xi(b)=\psi(b)$</li>
+<li><script type="math/tex; mode=display">\psi(g_i)(\xi(a_i))=\xi(g_i(a_i))=0</script><ul>
+<li><strong>$\xi(a_i)$是$\psi(g_i)(x)$在$\overline{K}$上的根</strong><h4 id="如何证明-psi-g-i-x-在-overline-K-上的根是某个-xi-a-i-上文的这些根都在哪里"><a href="#如何证明-psi-g-i-x-在-overline-K-上的根是某个-xi-a-i-上文的这些根都在哪里" class="headerlink" title="如何证明$\psi(g_i)(x)$在$\overline{K}$上的根是某个$\xi(a_i)$ (上文的这些根都在哪里)"></a>如何证明$\psi(g_i)(x)$在$\overline{K}$上的根是某个$\xi(a_i)$ (上文的这些根都在哪里)</h4></li>
+</ul>
 </li>
-<li></li>
-</ol>
+<li>直接方法是需要构造出$\xi\in Hom_{K}^{al}(M_{i},\overline{K})$, 使他是个$\psi$的延拓.<h5 id="如何从-psi-g-i-x-的根构造延拓"><a href="#如何从-psi-g-i-x-的根构造延拓" class="headerlink" title="如何从$\psi(g_i)(x)$的根构造延拓?"></a>如何从$\psi(g_i)(x)$的根构造延拓?</h5></li>
+<li>明确需要构造的目标是一个$M_i\mapsto \overline{K}$的$K$-同态</li>
+<li>把$M_i$看作多项式环的商环: $M_i\cong M_{i-1}[x]/(g_i(x))$</li>
+<li>假定$\beta$是$\psi(g_i)(x)$的根</li>
+<li>$\psi$是$M_{i-1}$到$\psi(M_{i-1})$的映射($\in Hom_{K}^{al}(M_{i-1},\overline{K})$)</li>
+<li>选择映射$M_i\mapsto \psi(M_{i-1})(\beta)$($M_i$中的元素就是用$M_{i-1}[x]/(g_i(x))$中的元素来表示):<script type="math/tex">f(x)+(g_i(x))\in M_{i-1}[x]/(g_i(x))$$$$f(x)+(g_i(x))\mapsto \psi(f)(x)+(\psi(g_i)(x))\mapsto \psi(f)(\beta)\in\psi(M_{i-1})(\beta)</script></li>
+<li><strong>Well-defined:</strong> $\beta$是$\psi(g_i)(x)$的根 —&gt; $\psi(g_i)(\beta)=0$<h4 id="如何证明-psi-g-i-x-的不同根的个数为-M-i-M-i-1"><a href="#如何证明-psi-g-i-x-的不同根的个数为-M-i-M-i-1" class="headerlink" title="如何证明$\psi(g_i)(x)$的不同根的个数为$[M_i:M_{i-1}]$"></a>如何证明$\psi(g_i)(x)$的不同根的个数为$[M_i:M_{i-1}]$</h4></li>
+<li><strong>证明$\psi(g_i)(x)$是可分多项式</strong><ul>
+<li>由于$\deg(\psi(g_i)(x))=\deg(g_i(x))=[M_i:M_{i-1}]$, 只要无重根即可<h5 id="如何证明可分"><a href="#如何证明可分" class="headerlink" title="如何证明可分"></a>如何证明可分</h5></li>
+</ul>
+</li>
+<li>证明$\psi(g_i)(x)$可以整除某个可分多项式即可<h5 id="整除谁"><a href="#整除谁" class="headerlink" title="整除谁"></a>整除谁</h5></li>
+<li>$f_i(x)$: $\alpha_i$在$K$上的最小多项式<ul>
+<li>由条件: 有限次可分扩张, $f_i(x)$是可分的.<h5 id="如何整除"><a href="#如何整除" class="headerlink" title="如何整除?"></a>如何整除?</h5></li>
+</ul>
+</li>
+<li>首先应该有$g_i(x) | f_i(x)$<ul>
+<li>$\forall \beta \in M_{i}$ s.t. $g_i(\beta)=0$, 都有$f_i(\beta)=0$. 这是由域扩张决定的 [[1.7.1.11 代数单扩张与其最小多项式的性质]]</li>
+</ul>
+</li>
+<li>$\psi(g_i)(x)|\psi(f_i)(x)$</li>
+<li>$\psi$是$K$-同态: $\psi(f_i)(x)=f_i(x)$</li>
+</ul>
+<p><strong>Q.E.D</strong></p>
+<p>[[1.7.3.1 可分扩张, 完全域]]</p>
 
         </div>
 
@@ -296,7 +332,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="https://yukaorigenji.github.io/2021/08/11/LWE%E7%9A%84%E5%88%A9%E7%94%A8sparsification%E7%9A%84%E5%B5%8C%E5%85%A5/">https://yukaorigenji.github.io/2021/08/11/LWE%E7%9A%84%E5%88%A9%E7%94%A8sparsification%E7%9A%84%E5%B5%8C%E5%85%A5/</a></span>
+                        <span><a href="https://yukaorigenji.github.io/2022/10/12/1.7.3.7(2)%20%E4%B8%AD%E9%97%B4%E5%9F%9F%E7%9A%84%E5%90%8C%E6%80%81%E7%BE%A4%E5%90%91%E5%9F%9F%E6%89%A9%E5%BC%A0%E7%9A%84%E5%BB%B6%E7%94%B3%E6%81%B0%E6%9C%89%E6%89%A9%E5%BC%A0%E6%AC%A1%E6%95%B0%E4%B8%AA/">https://yukaorigenji.github.io/2022/10/12/1.7.3.7(2)%20%E4%B8%AD%E9%97%B4%E5%9F%9F%E7%9A%84%E5%90%8C%E6%80%81%E7%BE%A4%E5%90%91%E5%9F%9F%E6%89%A9%E5%BC%A0%E7%9A%84%E5%BB%B6%E7%94%B3%E6%81%B0%E6%9C%89%E6%89%A9%E5%BC%A0%E6%AC%A1%E6%95%B0%E4%B8%AA/</a></span>
                     </p>
                 
                 
@@ -315,7 +351,7 @@
                 <span class="tag">
                     
                     
-                        <a href="/tags/%E6%A0%BC/"># 格</a>
+                        <a href="/tags/%E4%BB%A3%E6%95%B0/"># 代数</a>
                     
                         
                 </span>
@@ -328,10 +364,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2021/08/27/Terry-Tao-23-steps/">Terry Tao 23 steps</a>
             
-            
-            <a class="next" rel="next" href="/2021/08/08/%E7%8A%AF%E7%97%85/">犯病, 但咱不是嘉心糖捏</a>
+            <a class="next" rel="next" href="/2022/01/04/%E5%AD%A6%E9%AB%98%E7%AD%89%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E4%B8%80%E7%82%B9%E6%9D%82%E6%80%9D/">学高等概率论的一点杂思</a>
             
         </section>
 
