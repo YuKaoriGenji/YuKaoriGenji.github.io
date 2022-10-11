@@ -267,7 +267,9 @@
 <h2 id="命题"><a href="#命题" class="headerlink" title="命题"></a>命题</h2><h3 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h3><ul>
 <li>$L/K$有限, 可分扩张</li>
 <li>$M$是$L/K$的中间域</li>
-<li>$\phi:M\mapsto \overline{K}$同态 ($\phi\in Hom_{K}^{al}(M,\overline{K})$)<h3 id="宣言"><a href="#宣言" class="headerlink" title="宣言"></a>宣言</h3></li>
+<li>$\phi:M\mapsto \overline{K}$同态 ($\phi\in Hom_{K}^{al}(M,\overline{K})$)</li>
+</ul>
+<h3 id="宣言"><a href="#宣言" class="headerlink" title="宣言"></a>宣言</h3><ul>
 <li>$\phi$的$Hom_{K}^{al}(L,\overline{K})$上延拓个数为从$M$到$L$的扩张次数, 即$\psi\in Hom_{K}^{al}(L,\overline{K})$, $\left.\psi\right|_{M}=\phi$的个数为$[L:M]$个</li>
 </ul>
 <h2 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h2><h3 id="如何证明延拓个数"><a href="#如何证明延拓个数" class="headerlink" title="如何证明延拓个数"></a>如何证明延拓个数</h3><ul>
@@ -276,39 +278,57 @@
 <li>这是一个域扩张链条, 且每两个之间都是单扩张</li>
 <li>只需证明$\phi\in Hom_{K}^{al}(M_{i},\overline{K})$延拓到$Hom_{K}^{al}(M_{i-1},\overline{K})$由$[M_{i}:M_{i-1}]$个<blockquote>
 <p>将问题转化为单扩张下的问题</p>
-<h3 id="为什么单扩张下的问题可以转化为不止单扩张的问题"><a href="#为什么单扩张下的问题可以转化为不止单扩张的问题" class="headerlink" title="为什么单扩张下的问题可以转化为不止单扩张的问题?"></a>为什么单扩张下的问题可以转化为不止单扩张的问题?</h3></blockquote>
+</blockquote>
 </li>
+</ul>
+<h3 id="为什么单扩张下的问题可以转化为不止单扩张的问题"><a href="#为什么单扩张下的问题可以转化为不止单扩张的问题" class="headerlink" title="为什么单扩张下的问题可以转化为不止单扩张的问题?"></a>为什么单扩张下的问题可以转化为不止单扩张的问题?</h3><ul>
 <li>$\prod_{i=1}^{n}[M_{i},M_{i-1}]=[M_{n}:M_{0}]=[L:M]$ 域扩张的望远镜公式 [[]]</li>
-<li>延拓随扩张次数的乘法关系是明了的<h3 id="扩张次数和延拓个数之间的关系是通过什么建构的"><a href="#扩张次数和延拓个数之间的关系是通过什么建构的" class="headerlink" title="扩张次数和延拓个数之间的关系是通过什么建构的"></a>扩张次数和延拓个数之间的关系是通过什么建构的</h3></li>
+<li>延拓随扩张次数的乘法关系是明了的</li>
+</ul>
+<h3 id="扩张次数和延拓个数之间的关系是通过什么建构的"><a href="#扩张次数和延拓个数之间的关系是通过什么建构的" class="headerlink" title="扩张次数和延拓个数之间的关系是通过什么建构的"></a>扩张次数和延拓个数之间的关系是通过什么建构的</h3><ul>
 <li>$\psi\in Hom_{K}^{al}(M_{i-1},\overline{K})$</li>
 <li>令$\psi$的$Hom_{K}^{al}(M_{i},\overline{K})$上延拓为$\xi$, 则延拓必然满足$b\in M_{i-1}$, $\xi(b)=\psi(b)$</li>
 <li>$a_i$在$M_{i-1}$上的最小多项式$g_i(x)\in M_{i-1}(x)$</li>
 <li><strong>证明$\xi(a_i)$与$\psi(g_i)(x)$在$\overline{K}$上的根等价</strong><ul>
-<li>$\psi(g_i)(x)$指$\psi$作用在$g_i$的系数之上.<h4 id="如何证明-xi-a-i-是-psi-g-i-x-在-overline-K-上的根-最多这么多个"><a href="#如何证明-xi-a-i-是-psi-g-i-x-在-overline-K-上的根-最多这么多个" class="headerlink" title="如何证明$\xi(a_i)$是$\psi(g_i)(x)$在$\overline{K}$上的根 (最多这么多个)"></a>如何证明$\xi(a_i)$是$\psi(g_i)(x)$在$\overline{K}$上的根 (最多这么多个)</h4></li>
+<li>$\psi(g_i)(x)$指$\psi$作用在$g_i$的系数之上.</li>
 </ul>
 </li>
+</ul>
+<h4 id="如何证明-xi-a-i-是-psi-g-i-x-在-overline-K-上的根-最多这么多个"><a href="#如何证明-xi-a-i-是-psi-g-i-x-在-overline-K-上的根-最多这么多个" class="headerlink" title="如何证明$\xi(a_i)$是$\psi(g_i)(x)$在$\overline{K}$上的根 (最多这么多个)"></a>如何证明$\xi(a_i)$是$\psi(g_i)(x)$在$\overline{K}$上的根 (最多这么多个)</h4><ul>
 <li>证明$\psi(g_{i})(\xi(a_i))=0$</li>
 <li>利用$\forall b\in M_{i-1}$, $\xi(b)=\psi(b)$</li>
 <li><script type="math/tex; mode=display">\psi(g_i)(\xi(a_i))=\xi(g_i(a_i))=0</script><ul>
-<li><strong>$\xi(a_i)$是$\psi(g_i)(x)$在$\overline{K}$上的根</strong><h4 id="如何证明-psi-g-i-x-在-overline-K-上的根是某个-xi-a-i-上文的这些根都在哪里"><a href="#如何证明-psi-g-i-x-在-overline-K-上的根是某个-xi-a-i-上文的这些根都在哪里" class="headerlink" title="如何证明$\psi(g_i)(x)$在$\overline{K}$上的根是某个$\xi(a_i)$ (上文的这些根都在哪里)"></a>如何证明$\psi(g_i)(x)$在$\overline{K}$上的根是某个$\xi(a_i)$ (上文的这些根都在哪里)</h4></li>
+<li><strong>$\xi(a_i)$是$\psi(g_i)(x)$在$\overline{K}$上的根</strong></li>
 </ul>
 </li>
-<li>直接方法是需要构造出$\xi\in Hom_{K}^{al}(M_{i},\overline{K})$, 使他是个$\psi$的延拓.<h5 id="如何从-psi-g-i-x-的根构造延拓"><a href="#如何从-psi-g-i-x-的根构造延拓" class="headerlink" title="如何从$\psi(g_i)(x)$的根构造延拓?"></a>如何从$\psi(g_i)(x)$的根构造延拓?</h5></li>
+</ul>
+<h4 id="如何证明-psi-g-i-x-在-overline-K-上的根是某个-xi-a-i-上文的这些根都在哪里"><a href="#如何证明-psi-g-i-x-在-overline-K-上的根是某个-xi-a-i-上文的这些根都在哪里" class="headerlink" title="如何证明$\psi(g_i)(x)$在$\overline{K}$上的根是某个$\xi(a_i)$ (上文的这些根都在哪里)"></a>如何证明$\psi(g_i)(x)$在$\overline{K}$上的根是某个$\xi(a_i)$ (上文的这些根都在哪里)</h4><ul>
+<li>直接方法是需要构造出$\xi\in Hom_{K}^{al}(M_{i},\overline{K})$, 使他是个$\psi$的延拓.</li>
+</ul>
+<h5 id="如何从-psi-g-i-x-的根构造延拓"><a href="#如何从-psi-g-i-x-的根构造延拓" class="headerlink" title="如何从$\psi(g_i)(x)$的根构造延拓?"></a>如何从$\psi(g_i)(x)$的根构造延拓?</h5><ul>
 <li>明确需要构造的目标是一个$M_i\mapsto \overline{K}$的$K$-同态</li>
 <li>把$M_i$看作多项式环的商环: $M_i\cong M_{i-1}[x]/(g_i(x))$</li>
 <li>假定$\beta$是$\psi(g_i)(x)$的根</li>
 <li>$\psi$是$M_{i-1}$到$\psi(M_{i-1})$的映射($\in Hom_{K}^{al}(M_{i-1},\overline{K})$)</li>
 <li>选择映射$M_i\mapsto \psi(M_{i-1})(\beta)$($M_i$中的元素就是用$M_{i-1}[x]/(g_i(x))$中的元素来表示):<script type="math/tex">f(x)+(g_i(x))\in M_{i-1}[x]/(g_i(x))$$$$f(x)+(g_i(x))\mapsto \psi(f)(x)+(\psi(g_i)(x))\mapsto \psi(f)(\beta)\in\psi(M_{i-1})(\beta)</script></li>
-<li><strong>Well-defined:</strong> $\beta$是$\psi(g_i)(x)$的根 —&gt; $\psi(g_i)(\beta)=0$<h4 id="如何证明-psi-g-i-x-的不同根的个数为-M-i-M-i-1"><a href="#如何证明-psi-g-i-x-的不同根的个数为-M-i-M-i-1" class="headerlink" title="如何证明$\psi(g_i)(x)$的不同根的个数为$[M_i:M_{i-1}]$"></a>如何证明$\psi(g_i)(x)$的不同根的个数为$[M_i:M_{i-1}]$</h4></li>
+<li><strong>Well-defined:</strong> $\beta$是$\psi(g_i)(x)$的根 —&gt; $\psi(g_i)(\beta)=0$</li>
+</ul>
+<h4 id="如何证明-psi-g-i-x-的不同根的个数为-M-i-M-i-1"><a href="#如何证明-psi-g-i-x-的不同根的个数为-M-i-M-i-1" class="headerlink" title="如何证明$\psi(g_i)(x)$的不同根的个数为$[M_i:M_{i-1}]$"></a>如何证明$\psi(g_i)(x)$的不同根的个数为$[M_i:M_{i-1}]$</h4><ul>
 <li><strong>证明$\psi(g_i)(x)$是可分多项式</strong><ul>
-<li>由于$\deg(\psi(g_i)(x))=\deg(g_i(x))=[M_i:M_{i-1}]$, 只要无重根即可<h5 id="如何证明可分"><a href="#如何证明可分" class="headerlink" title="如何证明可分"></a>如何证明可分</h5></li>
+<li>由于$\deg(\psi(g_i)(x))=\deg(g_i(x))=[M_i:M_{i-1}]$, 只要无重根即可</li>
 </ul>
 </li>
-<li>证明$\psi(g_i)(x)$可以整除某个可分多项式即可<h5 id="整除谁"><a href="#整除谁" class="headerlink" title="整除谁"></a>整除谁</h5></li>
+</ul>
+<h5 id="如何证明可分"><a href="#如何证明可分" class="headerlink" title="如何证明可分"></a>如何证明可分</h5><ul>
+<li>证明$\psi(g_i)(x)$可以整除某个可分多项式即可</li>
+</ul>
+<h5 id="整除谁"><a href="#整除谁" class="headerlink" title="整除谁"></a>整除谁</h5><ul>
 <li>$f_i(x)$: $\alpha_i$在$K$上的最小多项式<ul>
-<li>由条件: 有限次可分扩张, $f_i(x)$是可分的.<h5 id="如何整除"><a href="#如何整除" class="headerlink" title="如何整除?"></a>如何整除?</h5></li>
+<li>由条件: 有限次可分扩张, $f_i(x)$是可分的.</li>
 </ul>
 </li>
+</ul>
+<h5 id="如何整除"><a href="#如何整除" class="headerlink" title="如何整除?"></a>如何整除?</h5><ul>
 <li>首先应该有$g_i(x) | f_i(x)$<ul>
 <li>$\forall \beta \in M_{i}$ s.t. $g_i(\beta)=0$, 都有$f_i(\beta)=0$. 这是由域扩张决定的 [[1.7.1.11 代数单扩张与其最小多项式的性质]]</li>
 </ul>
