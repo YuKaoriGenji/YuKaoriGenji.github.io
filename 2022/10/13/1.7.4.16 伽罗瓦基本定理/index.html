@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="MatsueYu">
+
+
+    <meta name="subtitle" content="空星与海">
+
+
+    <meta name="description" content="记录一些研究随笔和生活感想什么的">
+
+
+
+<title>伽罗瓦基本定理 | 星歌研究所</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+            <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">星歌研究所</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">星歌研究所</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">伽罗瓦基本定理</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">MatsueYu</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">October 13, 2022&nbsp;&nbsp;16:31:08</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E6%95%B0%E5%AD%A6/">数学</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h1><h1 id="命题"><a href="#命题" class="headerlink" title="命题"></a>命题</h1><h3 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h3><ul>
+<li>$L/K$是域</li>
+<li>$L/K$是有限扩张, 是伽罗瓦扩张</li>
+<li>$\mathbb{M}$ 是全体中间域$M$的集合</li>
+<li>$\mathbb{H}$ 是伽罗瓦群$Gal(L/K)$的全体子群的集合<h3 id="宣称"><a href="#宣称" class="headerlink" title="宣称"></a>宣称</h3><h4 id="1"><a href="#1" class="headerlink" title="(1)"></a>(1)</h4></li>
+<li>$M\in \mathbb{M}$与$H\in\mathbb{H}$ <strong>一一对应</strong>: 以下的两个映射互逆 [[1.7.4.15 不动域]]<ul>
+<li>$M\longrightarrow H(M)$</li>
+<li>$H\longrightarrow M_H$<h4 id="2"><a href="#2" class="headerlink" title="(2)"></a>(2)</h4></li>
+</ul>
+</li>
+<li>$M_1,M_2\in \mathbb{M}$, $H_1,H_2\in \mathbb{H}$之间存在对应关系<ul>
+<li>$M_1\subset M_2 \longleftrightarrow H_1\supset H_2$</li>
+<li>$M_1\cdot M_2 \longleftrightarrow H_1\subset H_2$</li>
+<li>$M_1\subset M_2 \longleftrightarrow \left<H_1,H_2\right>$<blockquote>
+<p>$\left<H_1, H_2\right>$是由$H_1,H_2$生成的$L$的子群</p>
+<h4 id="3"><a href="#3" class="headerlink" title="(3)"></a>(3)</h4><h5 id="条件-1"><a href="#条件-1" class="headerlink" title="条件"></a>条件</h5></blockquote>
+</li>
+</ul>
+</li>
+<li>$M\in\mathbb{M}$, $H\in\mathbb{H}$相互对应</li>
+<li>$\sigma\in Gal(L/K)$<h5 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h5></li>
+<li>$\sigma(M)\longleftrightarrow \sigma H \sigma^{-1}$</li>
+<li>$M/K$是伽罗瓦扩张 ($\sigma(M)=M$) $\Longleftrightarrow H\lhd Gal(L/K)$<blockquote>
+<p>回忆正规子群的定义: $H=\sigma H \sigma^{-1}$</p>
+<h5 id="派生"><a href="#派生" class="headerlink" title="派生"></a>派生</h5></blockquote>
+</li>
+<li>若$H\lhd Gal(L/K)$ , 则 $Gal(M/K)\cong Gal(L/K)/H$, 即 $Gal(M/K)\cong Gal(L/K)/Gal(L/M)$<ul>
+<li>能够这样的理由是$H$是正规子群.<blockquote>
+<p>(理解这个东西的关键在于: $\phi\in Gal(L/K)$, then $\exists \ \psi\in Gal(M/K),\pi\in Gal(L/M)$, s.t. $\phi=\psi+\pi$. 这样就好理解了. $M$内的元素由$\psi$决定, $M$外的元素由$\pi$决定).</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h2><ul>
+<li>首先要理解这个定理考虑的是什么东西: 是中间域和伽罗瓦群($K$-同态群)之间的对应关系<h3 id="1-1"><a href="#1-1" class="headerlink" title="(1)"></a>(1)</h3><h4 id="如何证明两边是互逆"><a href="#如何证明两边是互逆" class="headerlink" title="如何证明两边是互逆?"></a>如何证明两边是互逆?</h4></li>
+<li>$M_{H(M)}=M$</li>
+<li>$H(M_{H})=H$<h4 id="如何证明-M-H-M-M"><a href="#如何证明-M-H-M-M" class="headerlink" title="如何证明$M_{H(M)}=M$"></a>如何证明$M_{H(M)}=M$</h4></li>
+<li>$M\subset M_{H(M)}$是由定义直接陈述的</li>
+<li>通过假设$M\neq M_{H(M)}$, 构造矛盾<h5 id="如果两者不相等-哪里会有矛盾"><a href="#如果两者不相等-哪里会有矛盾" class="headerlink" title="如果两者不相等, 哪里会有矛盾"></a>如果两者不相等, 哪里会有矛盾</h5></li>
+<li>运用常规思路找一个$\alpha\in M_{H(M)}$, 且$\alpha\notin M$来寻找矛盾<h5 id="这样生成的-alpha-之后可以探索的点在哪里"><a href="#这样生成的-alpha-之后可以探索的点在哪里" class="headerlink" title="这样生成的$\alpha$之后可以探索的点在哪里"></a>这样生成的$\alpha$之后可以探索的点在哪里</h5></li>
+<li>且根据假设, $[M(\alpha):M]&gt;1$<ul>
+<li><strong>$\exists\ \beta$是$\alpha$的共轭 (重要!!!!!!)</strong><h5 id="产生的矛盾在哪里"><a href="#产生的矛盾在哪里" class="headerlink" title="产生的矛盾在哪里"></a>产生的矛盾在哪里</h5></li>
+</ul>
+</li>
+<li><strong>存在$\psi\in H(M)=Gal(L/M)$, $\psi(\alpha)\neq \alpha$.</strong></li>
+<li>这样的$\phi$的定义方式必然是把$\alpha$映射成别的什么<h5 id="如何找到这个-psi"><a href="#如何找到这个-psi" class="headerlink" title="如何找到这个$\psi$"></a>如何找到这个$\psi$</h5></li>
+<li>找一个把$\alpha$映射走的$\phi$, 将$\phi$<strong>延拓到$H(M)=Gal(L/M)$之中</strong>,<ul>
+<li>[[1.7.3.7(2) 中间域的同态群向域扩张的延申恰有扩张次数个]]<h5 id="这个-phi-要满足什么条件"><a href="#这个-phi-要满足什么条件" class="headerlink" title="这个$\phi$要满足什么条件"></a>这个$\phi$要满足什么条件</h5></li>
+</ul>
+</li>
+<li>满足1.7.3.7(2)的定理要求<ul>
+<li>$\phi$需要是$M$-同态</li>
+<li>$\phi$的定义域需要是$L$的子域</li>
+</ul>
+</li>
+<li>把$\alpha$映射走<h5 id="这个定义域是什么"><a href="#这个定义域是什么" class="headerlink" title="这个定义域是什么"></a>这个定义域是什么</h5></li>
+<li>$M(\alpha)$, 是一个单扩张, 且是$M_{H(M)}/M$的中间域<h5 id="phi-如何构造"><a href="#phi-如何构造" class="headerlink" title="$\phi$如何构造"></a>$\phi$如何构造</h5></li>
+<li>找一个$\alpha$的共轭, $M(\alpha)\rightarrow M(\beta)$, 只要$\beta$在$L$里面即可满足是一个$M(\alpha)\mapsto L$的同态.<ul>
+<li>[[1.7.1.26某元最小多项式的根都是共轭元, 并引导子域同构]]</li>
+</ul>
+</li>
+<li>$\beta\in L$, 因为伽罗瓦扩张是可分扩张[[1.7.4.2 伽罗瓦扩张和伽罗瓦群]]</li>
+</ul>
+<h4 id="如何证明-H-M-H-H"><a href="#如何证明-H-M-H-H" class="headerlink" title="如何证明$H(M_{H})=H$"></a>如何证明$H(M_{H})=H$</h4><ul>
+<li>通过证明$[L:M_H]=|H|$<ul>
+<li>这是因为$H(M_H)=[L:M_H]$ [[1.7.4.3 有限次扩张的K-自同构数量小于等于扩张次数, 伽罗瓦扩张则等于]]</li>
+</ul>
+</li>
+</ul>
+<h5 id="如何证明-L-M-H-H"><a href="#如何证明-L-M-H-H" class="headerlink" title="如何证明 $[L:M_H]=|H|$"></a>如何证明 $[L:M_H]=|H|$</h5><ul>
+<li>本证明采用的是夹逼方法. 首先已经知道 $|H|&lt;|H(M)|=[L:M_{H}]$.<ul>
+<li>令$n:=|H|$, 证 $[L:M_{H}]\leq n$</li>
+</ul>
+</li>
+</ul>
+<h5 id="如何证明-L-M-H-leq-n"><a href="#如何证明-L-M-H-leq-n" class="headerlink" title="如何证明 $[L:M_{H}]\leq n$"></a>如何证明 $[L:M_{H}]\leq n$</h5><ul>
+<li>因为是有限扩张, 所以这是一个单扩张 $\exists \alpha$ s.t. $M_{H}(\alpha)=L$</li>
+<li>给这个域扩张找一个多项式$f(x)\in M_{H}[x]$, s.t. $f(\alpha)=0$, 这样就有$L\subset M_{H}[x]/(f(x))$</li>
+<li>然后证明$\deg(f(x))=n$即可</li>
+</ul>
+<h5 id="这样一个-f-x-是如何构造的"><a href="#这样一个-f-x-是如何构造的" class="headerlink" title="这样一个$f(x)$是如何构造的?"></a>这样一个$f(x)$是如何构造的?</h5><ul>
+<li>$f(x)=\prod_{\sigma\in H}(x-\sigma(\alpha))$</li>
+</ul>
+<h6 id="如何满足-f-alpha-0"><a href="#如何满足-f-alpha-0" class="headerlink" title="如何满足 $f(\alpha)=0$?"></a>如何满足 $f(\alpha)=0$?</h6><p>因为$id\in H$, 所以显然.</p>
+<h6 id="如何满足-f-x-in-M-H-x"><a href="#如何满足-f-x-in-M-H-x" class="headerlink" title="如何满足 $f(x)\in M_{H}[x]$?"></a>如何满足 $f(x)\in M_{H}[x]$?</h6><ul>
+<li>根据$M_H$的定义, 证明$\tau\in H$, $\tau(f(x))=f(x)$, 即可证明$f(x)$的所有系数都在$M_H$中.\<ul>
+<li>这个也是显然, 因为$\forall \tau,\sigma\in H$, $\tau\sigma=\tau(\sigma)\in H$, 而$f(x)$要求是跑遍$\sigma \in H$.</li>
+</ul>
+</li>
+</ul>
+<h6 id="如何满足-deg-f-x-n"><a href="#如何满足-deg-f-x-n" class="headerlink" title="如何满足$\deg(f(x))=n$?"></a>如何满足$\deg(f(x))=n$?</h6><ul>
+<li>$|H|=n$.</li>
+</ul>
+<p>Q.E.D.</p>
+<h3 id="2-1"><a href="#2-1" class="headerlink" title="(2)"></a>(2)</h3><p>这总体上是一系列非常明显的推论, 稍微说一下原理就行了</p>
+<h4 id="M-1-subset-M-2-Longleftrightarrow-H-1-supset-H-2"><a href="#M-1-subset-M-2-Longleftrightarrow-H-1-supset-H-2" class="headerlink" title="$M_1\subset M_2 \Longleftrightarrow H_1\supset H_2$"></a>$M_1\subset M_2 \Longleftrightarrow H_1\supset H_2$</h4><ul>
+<li>$H_2$中的同态保证$M_2$不变, 就一定能保证$M_1$不变</li>
+<li>反之同理</li>
+</ul>
+<h4 id="M-1-cdot-M-2-longleftrightarrow-H-1-cap-H-2"><a href="#M-1-cdot-M-2-longleftrightarrow-H-1-cap-H-2" class="headerlink" title="$M_1 \cdot M_2 \longleftrightarrow H_1\cap H_2$"></a>$M_1 \cdot M_2 \longleftrightarrow H_1\cap H_2$</h4><ul>
+<li>$g$ 令$M_1\cdot M_2$不变, 则$g$ 既令$M_1$不变, 也令$M_2$ 不变</li>
+<li>反之亦然, 需要考虑同态加法性质</li>
+</ul>
+<h4 id="M-1-cap-M-2-longleftrightarrow-left"><a href="#M-1-cap-M-2-longleftrightarrow-left" class="headerlink" title="$M_1 \cap M_2 \longleftrightarrow \left$"></a>$M_1 \cap M_2 \longleftrightarrow \left<H_1, H_2\right>$</h4><ul>
+<li>令$M_1$和$M_2$中的公共元素不变, 则无论$H_1$还是$H_2$中的元素都是可以的 , 于是$H_1$和$H_2$生成的元素也都是可以的.</li>
+</ul>
+<h3 id="3-1"><a href="#3-1" class="headerlink" title="(3)"></a>(3)</h3><h4 id="怎么证明问题1-sigma-M-longleftrightarrow-sigma-H-sigma-1-即-H-sigma-M-sigma-H-sigma-1"><a href="#怎么证明问题1-sigma-M-longleftrightarrow-sigma-H-sigma-1-即-H-sigma-M-sigma-H-sigma-1" class="headerlink" title="怎么证明问题1 $\sigma(M)\longleftrightarrow \sigma H \sigma^{-1}$ (即$H(\sigma(M))=\sigma H\sigma^{-1}$)"></a>怎么证明问题1 $\sigma(M)\longleftrightarrow \sigma H \sigma^{-1}$ (即$H(\sigma(M))=\sigma H\sigma^{-1}$)</h4><ul>
+<li><strong>statement 1</strong>:$\forall \tau\in H(\sigma(M))$, 证明$\sigma^{-1}\circ\tau\circ\sigma\in H$</li>
+<li><strong>statement 2</strong>:$\forall \tau\in H$, 证明$\sigma\circ\tau\circ\sigma^{-1}\in H(\sigma(M))$</li>
+</ul>
+<h5 id="如何证明statement-1"><a href="#如何证明statement-1" class="headerlink" title="如何证明statement 1"></a>如何证明statement 1</h5><ul>
+<li>$\forall \tau\in H(\sigma(M))$, $\forall \alpha\in M$, $\sigma^{-1}\circ\tau\circ\sigma(\alpha)=\alpha$</li>
+<li>等价于$\forall \alpha\in M, \tau(\sigma(\alpha))=\sigma(\alpha)$<ul>
+<li>这是$H$的定义</li>
+</ul>
+</li>
+</ul>
+<h5 id="上面的命题为什么是真的"><a href="#上面的命题为什么是真的" class="headerlink" title="上面的命题为什么是真的"></a>上面的命题为什么是真的</h5><ul>
+<li>上述命题等价于$\sigma(M)$的各个元在$\tau\in Gal(L/K)$的作用下不变<ul>
+<li>这个就是$H(\sigma(M))$的定义!</li>
+</ul>
+</li>
+</ul>
+<h5 id="如何证明statement-2"><a href="#如何证明statement-2" class="headerlink" title="如何证明statement 2"></a>如何证明statement 2</h5><ul>
+<li>等价于证明 $\forall \alpha\in \sigma(M), \sigma(\tau(\sigma^{-1}(\alpha)))=\alpha$</li>
+<li>等价于证明 $\forall \alpha\in M, \sigma(\tau(\sigma^{-1}(\sigma(\alpha))))=\sigma(\alpha)$</li>
+<li>等价于证明 $\forall \alpha\in M, \sigma(\tau(\alpha))=\sigma(\alpha)$<br>毕<blockquote>
+<p>总体来说, 这一系列证明的关键在于 1. 用元素指代映射 2. 善用等式配平<br>直观上理解, 可以理解为: 最先的$\sigma^{-1}$用来消除原有的$\sigma(M)$中自带的$\sigma$, 经过自等变换后, 再给他套上一个$\sigma$ 恢复原来的$\sigma$. 这是经典共轭映射的做法</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="问题2-M-K-是伽罗瓦扩张-Longleftrightarrow-H-lhd-Gal-L-K"><a href="#问题2-M-K-是伽罗瓦扩张-Longleftrightarrow-H-lhd-Gal-L-K" class="headerlink" title="问题2 $M/K$是伽罗瓦扩张 $\Longleftrightarrow H\lhd Gal(L/K)$"></a>问题2 $M/K$是伽罗瓦扩张 $\Longleftrightarrow H\lhd Gal(L/K)$</h4><ul>
+<li>其实就是证明<ul>
+<li>$M/K$是伽罗瓦扩张 $\Longleftrightarrow$ $\forall \sigma\in Gal(L/K)$, $\sigma H \sigma^{-1}=H$</li>
+</ul>
+</li>
+</ul>
+<h5 id="这个命题怎么证明呢"><a href="#这个命题怎么证明呢" class="headerlink" title="这个命题怎么证明呢?"></a>这个命题怎么证明呢?</h5><ul>
+<li>构造一系列命题等价链, 最终归结到一个已经被证明的等价命题上</li>
+</ul>
+<h5 id="等价链是怎么构造的"><a href="#等价链是怎么构造的" class="headerlink" title="等价链是怎么构造的"></a>等价链是怎么构造的</h5><ul>
+<li>根据上述以证明部分<ul>
+<li>$\forall \sigma\in Gal(L/K)$, $\sigma H \sigma^{-1}=H$ $\Longleftrightarrow$ $H=H(M)=H(\sigma(M))$</li>
+<li>应证明 $M/K$是伽罗瓦扩张 $\Longleftrightarrow$ $H=H(M)=H(\sigma(M))$</li>
+</ul>
+</li>
+<li>由于$H=H(M)=H(\sigma(M))$ $\Longleftrightarrow$ $\sigma(M)=M$<ul>
+<li>$M/K$是伽罗瓦扩张 $\Longleftrightarrow$ $\sigma(M)=M$ (自然)</li>
+</ul>
+</li>
+<li>由于已知$[M:K]&lt;\infty$, for $\sigma\in Gal(L/K)$, $\sigma(M)=M$ $\Longleftrightarrow$ $\sigma(M)\subset M$<ul>
+<li>其实这个非常好证明<ul>
+<li>首先注意到$\sigma$其实是一个同构 [[1.7.3.11 有限扩张的Aut群就是Hom群]]</li>
+<li>假设$\exists\ \alpha\in M\backslash \sigma(M)$, 则$M\ /\ \sigma(M)(\alpha)\ /\ \sigma(M)$是有限域扩张且非trivial</li>
+<li>这样的话由于$\sigma(\alpha)$与$\alpha$共轭, $\sigma(M)(\sigma(\alpha))$ 也是一个$\sigma(M)$的有限域扩张且扩张次数$\neq 0$</li>
+<li>但$\sigma(M)(\sigma(\alpha))\in \sigma(M)$, 矛盾</li>
+</ul>
+</li>
+<li>$M/K$是伽罗瓦扩张 $\Longleftrightarrow$ $\forall \sigma\in Gal(L/K)$, $\sigma(M)\subset M$</li>
+</ul>
+</li>
+<li>$\forall \sigma\in Gal(L/K)$ $\Longleftrightarrow$ $\forall \sigma\in Hom_{K}^{al}(M,\overline{K})$<ul>
+<li>这一步是我认为最难以理解的</li>
+<li>由于$L/K$是正规扩张(by definition of 伽罗瓦扩张 [[1.7.4.2 伽罗瓦扩张和伽罗瓦群]]), $\sigma\in Hom_{K}^{al}(M,\overline{K})$可以延拓到$Gal(L/K)$中<ul>
+<li>本来就可以延拓到$Hom_{K}^{L}(L,\overline{K})$ [[1.7.3.7(2) 中间域的同态群向域扩张的延申恰有扩张次数个]]</li>
+<li>$L/K$是正规扩张的话, 就有$Gal(L/K):=Hom_{K}^{al}(L,\overline{K})$</li>
+</ul>
+</li>
+<li>$M/K$是伽罗瓦扩张 $\Longleftrightarrow$ $\forall \sigma\in Hom_{K}^{al}(M,\overline{K})$ [[1.7.3.9 正规扩张的等价条件]]</li>
+</ul>
+</li>
+</ul>
+<h3 id="派生-证明-Gal-M-K-cong-Gal-L-K-Gal-L-M"><a href="#派生-证明-Gal-M-K-cong-Gal-L-K-Gal-L-M" class="headerlink" title="派生 证明$Gal(M/K)\cong Gal(L/K)/Gal(L/M)$"></a>派生 证明$Gal(M/K)\cong Gal(L/K)/Gal(L/M)$</h3><ul>
+<li>考虑一个限制同态$\pi:Gal(L/K)\mapsto Gal(M/K)$, 证明他是<ul>
+<li>证明well-defined</li>
+<li>证明满射</li>
+<li>找到kernel</li>
+</ul>
+</li>
+</ul>
+<h4 id="well-defined"><a href="#well-defined" class="headerlink" title="well-defined"></a>well-defined</h4><ul>
+<li>由于$M/K$是伽罗瓦扩张, 是限制同态, 自然存在well-defined性质</li>
+</ul>
+<h4 id="满射"><a href="#满射" class="headerlink" title="满射"></a>满射</h4><ul>
+<li>由于是限制同态,  由[[1.7.3.7(2) 中间域的同态群向域扩张的延申恰有扩张次数个]]</li>
+</ul>
+<h4 id="Ker-pi"><a href="#Ker-pi" class="headerlink" title="$Ker(\pi)$"></a>$Ker(\pi)$</h4><ul>
+<li>由定义, kernel是$Gal(L/M)$</li>
+</ul>
+<p>Q.E.D</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>MatsueYu</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://yukaorigenji.github.io/2022/10/13/1.7.4.16%20%E4%BC%BD%E7%BD%97%E7%93%A6%E5%9F%BA%E6%9C%AC%E5%AE%9A%E7%90%86/">https://yukaorigenji.github.io/2022/10/13/1.7.4.16%20%E4%BC%BD%E7%BD%97%E7%93%A6%E5%9F%BA%E6%9C%AC%E5%AE%9A%E7%90%86/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E4%BB%A3%E6%95%B0/"># 代数</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2022/10/12/1.7.3.7(2)%20%E4%B8%AD%E9%97%B4%E5%9F%9F%E7%9A%84%E5%90%8C%E6%80%81%E7%BE%A4%E5%90%91%E5%9F%9F%E6%89%A9%E5%BC%A0%E7%9A%84%E5%BB%B6%E7%94%B3%E6%81%B0%E6%9C%89%E6%89%A9%E5%BC%A0%E6%AC%A1%E6%95%B0%E4%B8%AA/">中间域的同态群在域扩张上的延拓恰有扩张次数个</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© MatsueYu | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
